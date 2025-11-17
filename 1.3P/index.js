@@ -1,1 +1,1 @@
-console.log("Hello SIT725! This is task 1.3P.");
+console.log("Hello SIT725! This is task 1.3P");
