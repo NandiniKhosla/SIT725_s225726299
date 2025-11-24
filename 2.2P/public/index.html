@@ -4,8 +4,34 @@
     <title>SIT725 Task 2.2P</title>
 </head>
 <body>
-    <h1>Hello! Your Express Server is Running</h1>
-    <p>Use this URL to add numbers:</p>
-    <code>http://localhost:3000/add?num1=5&num2=10</code>
+    <h1>SIT725 Task 2.2P – Add Two Numbers</h1>
+
+    <form id="addForm">
+        <label>Enter Number 1:</label>
+        <input type="number" id="num1" required><br><br>
+
+        <label>Enter Number 2:</label>
+        <input type="number" id="num2" required><br><br>
+
+        <button type="submit">Add</button>
+    </form>
+
+    <h3 id="result"></h3>
+
+    <script>
+        document.getElementById('addForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const num1 = document.getElementById('num1').value;
+            const num2 = document.getElementById('num2').value;
+
+            const response = await fetch(`/add?num1=${num1}&num2=${num2}`);
+            const data = await response.json();
+
+            document.getElementById('result').innerText =
+                data.error ? data.error : "Result: " + data.result;
+        });
+    </script>
+
 </body>
 </html>

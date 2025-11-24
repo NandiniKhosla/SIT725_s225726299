@@ -3,8 +3,9 @@ const app = express();
 const path = require('path');
 
 app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
 
-// Simple homepage
+// Homepage
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
@@ -18,11 +19,9 @@ app.get('/add', (req, res) => {
         return res.json({ error: "Please provide valid numbers" });
     }
 
-    let result = n1 + n2;
-    res.json({ result: result });
+    res.json({ result: n1 + n2 });
 });
 
-// Run server
 app.listen(3000, () => {
     console.log("Server running on http://localhost:3000");
 });
