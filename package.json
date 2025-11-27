@@ -1,0 +1,24 @@
+{
+  "name": "sit725_s225726299",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NandiniKhosla/SIT725_s225726299.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NandiniKhosla/SIT725_s225726299/issues"
+  },
+  "homepage": "https://github.com/NandiniKhosla/SIT725_s225726299#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  }
+}

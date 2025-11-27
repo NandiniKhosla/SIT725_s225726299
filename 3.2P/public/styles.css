@@ -1,0 +1,95 @@
+/* =========================================
+   1. GLOBAL LAYOUT (Sticky Footer Setup)
+   ========================================= */
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background-color: #f4f6f8; /* Soft light grey background */
+  font-family: 'Roboto', sans-serif;
+}
+
+main {
+  flex: 1 0 auto; /* This pushes the footer to the bottom */
+  padding-bottom: 50px;
+}
+
+/* =========================================
+   2. TYPOGRAPHY
+   ========================================= */
+h3 {
+  font-weight: 300;       /* Thin, modern font weight */
+  color: #00897b;         /* Matches the Teal Navbar */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 50px;
+  margin-bottom: 40px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* =========================================
+   3. CARD STYLING (The "Professional" Look)
+   ========================================= */
+.card {
+  border-radius: 12px;          /* Rounded corners */
+  border: none;                 /* Remove default borders */
+  background: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
+}
+
+/* Hover Effect: Lift the card up */
+.card:hover {
+  transform: translateY(-10px); 
+  box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+}
+
+/* Image Styling */
+.card-image img {
+  border-radius: 12px 12px 0 0; /* Round only top corners */
+  height: 220px;                /* Force all images to same height */
+  object-fit: cover;            /* Crop image nicely, don't stretch */
+  filter: brightness(0.98);     /* Slight dim for elegance */
+  transition: filter 0.3s;
+}
+
+.card:hover .card-image img {
+  filter: brightness(1.1);      /* Brighten on hover */
+}
+
+/* Card Title Text */
+.card .card-title {
+  font-weight: 500 !important;
+  font-size: 1.4rem !important;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.6); /* Text shadow for readability over images */
+}
+
+/* Content Padding */
+.card-content {
+  padding: 24px !important;
+}
+
+/* =========================================
+   4. CARD REVEAL (The "Hidden" Section)
+   ========================================= */
+.card-reveal {
+  border-radius: 12px; /* Match card shape */
+  padding: 24px !important;
+  background-color: #ffffff;
+  color: #333;
+}
+
+.card-reveal .card-title {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #000;
+  text-shadow: none; /* No shadow needed on white background */
+  margin-bottom: 20px !important;
+}
+
+/* =========================================
+   5. FOOTER
+   ========================================= */
+footer.page-footer {
+  margin-top: 0;
+  padding-top: 20px;
+}
