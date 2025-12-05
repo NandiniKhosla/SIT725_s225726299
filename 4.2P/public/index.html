@@ -5,7 +5,6 @@
 <title>Student Records App</title>
 
 <style>
-    /* Global Reset and Typography */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
     
     :root {
@@ -28,7 +27,6 @@
         padding-top: 50px;
     }
 
-    /* Container Styling */
     .container {
         width: 750px;
         background: white;
@@ -45,7 +43,6 @@
         margin-bottom: 20px;
     }
 
-    /* Form and Input Styling */
     form {
         display: flex;
         flex-direction: column;
@@ -67,7 +64,6 @@
         box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
     }
 
-    /* Primary Button Styling */
     button[type="submit"] {
         background: var(--primary-color);
         color: white;
@@ -84,8 +80,7 @@
         background: var(--primary-hover);
         transform: translateY(-1px);
     }
-    
-    /* Table Styling */
+
     .records-table {
         width: 100%;
         border-collapse: separate;
@@ -105,28 +100,23 @@
         background: var(--primary-color);
         color: white;
         font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
     }
 
-    .records-table th:first-child { border-top-left-radius: 8px; }
-    .records-table th:last-child { border-top-right-radius: 8px; }
-    
-    .records-table tr:nth-child(even) { background-color: var(--bg-light); }
-    
+    .records-table tr:nth-child(even) {
+        background-color: var(--bg-light);
+    }
+
     .records-table tr:hover {
         background-color: #e0f0ff;
         cursor: pointer;
     }
 
-    /* Delete Button Styling */
     .del {
         background: var(--danger-color);
         border: none;
         color: white;
         padding: 6px 10px;
         border-radius: 6px;
-        font-size: 12px;
         cursor: pointer;
         font-weight: 500;
         transition: 0.3s ease;
@@ -137,7 +127,6 @@
         transform: scale(1.05);
     }
 
-    /* Animation */
     @keyframes fadeIn {
         from { opacity: 0; transform: translateY(20px); }
         to   { opacity: 1; transform: translateY(0px); }
@@ -146,7 +135,6 @@
 </head>
 
 <body>
-
 <div class="container">
     <h1>Student Records</h1>
     
@@ -172,9 +160,7 @@
                 <th>Action</th>
             </tr>
         </thead>
-        <tbody id="recordsTableBody">
-            <!-- Data from Database loads here -->
-        </tbody>
+        <tbody id="recordsTableBody"></tbody>
     </table>
 </div>
 
@@ -182,72 +168,59 @@
     const api = '/api/records';
     const tableBody = document.getElementById('recordsTableBody');
 
-    // 1. Fetch and Display Records
+    // Fetch all records
     async function fetchRecords() {
-        try {
-            const res = await fetch(api);
-            const data = await res.json();
-            
-            tableBody.innerHTML = ''; // Clear current list
-            
-            data.forEach(r => {
-                const newRow = document.createElement('tr');
-                
-                newRow.innerHTML = `
-                    <td>${r.fullName}</td>
-                    <td>${r.rollNo}</td>
-                    <td>${r.course}</td>
-                    <td>${r.year}</td>
-                    <td>${r.cgpa || 'N/A'}</td>
-                    <td><button class="del" data-id="${r._id}">Delete</button></td>
-                `;
-                tableBody.appendChild(newRow);
-            });
-        } catch (err) {
-            console.error("Error fetching records:", err);
-        }
+        const res = await fetch(api);
+        const data = await res.json();
+
+        tableBody.innerHTML = "";
+        data.forEach(rec => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${rec.fullName}</td>
+                <td>${rec.rollNo}</td>
+                <td>${rec.course}</td>
+                <td>${rec.year}</td>
+                <td>${rec.cgpa ?? "N/A"}</td>
+                <td><button class="del" data-id="${rec._id}">Delete</button></td>
+            `;
+            tableBody.appendChild(row);
+        });
     }
 
-    // 2. Handle Form Submission
-    document.getElementById('recForm').addEventListener('submit', async (e) => {
+    // Add new record
+    document.getElementById("recForm").addEventListener("submit", async (e) => {
         e.preventDefault();
-        
+
         const body = {
-            fullName: document.getElementById('fullName').value,
-            rollNo: document.getElementById('rollNo').value,
-            course: document.getElementById('course').value,
-            year: Number(document.getElementById('year').value),
-            cgpa: parseFloat(document.getElementById('cgpa').value) || null
+            fullName: fullName.value,
+            rollNo: rollNo.value,
+            course: course.value,
+            year: Number(year.value),
+            cgpa: cgpa.value ? Number(cgpa.value) : null
         };
 
-        try {
-            await fetch(api, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body)
-            });
-            e.target.reset();
-            fetchRecords(); // Refresh the table
-        } catch (err) {
-            console.error("Error adding record:", err);
-        }
+        await fetch(api, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+        });
+
+        e.target.reset();
+        fetchRecords();
     });
 
-    // 3. Handle Deletion
-    tableBody.addEventListener('click', async (e) => {
-        if (e.target.classList.contains('del')) {
+    // Delete record
+    tableBody.addEventListener("click", async (e) => {
+        if (e.target.classList.contains("del")) {
             const id = e.target.dataset.id;
-            try {
-                await fetch(`${api}/${id}`, { method: 'DELETE' });
-                fetchRecords(); // Refresh the table
-            } catch (err) {
-                console.error("Error deleting record:", err);
-            }
+            await fetch(`${api}/${id}`, { method: "DELETE" });
+            fetchRecords();
         }
     });
 
-    // Initial Load
     fetchRecords();
 </script>
+
 </body>
 </html>
