@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Books Catalog</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            background: #4a4ef2;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-left: 5px solid #4a4ef2;
+        }
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .author {
+            color: #555;
+            font-style: italic;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>Books Catalog</header>
+
+    <div class="container" id="booksContainer">
+        Loading...
+    </div>
+
+    <script>
+        // STRICT REQUIREMENT: Use relative path, do not hardcode localhost
+        fetch("/api/books")
+            .then(res => {
+                if (!res.ok) throw new Error("Network response was not ok");
+                return res.json();
+            })
+            .then(data => {
+                const container = document.getElementById("booksContainer");
+                container.innerHTML = "";
+
+                if (data.length === 0) {
+                    container.innerHTML = "<p>No books found.</p>";
+                    return;
+                }
+
+                data.forEach(book => {
+                    const card = document.createElement("div");
+                    card.className = "card";
+
+                    // STRICT REQUIREMENT: Render list showing title and author
+                    card.innerHTML = `
+                        <div class="title">${book.title}</div>
+                        <div class="author">by ${book.author}</div>
+                    `;
+
+                    container.appendChild(card);
+                });
+            })
+            .catch(err => {
+                console.error(err);
+                document.getElementById("booksContainer").innerHTML =
+                    "<p style='color:red; text-align:center;'>Failed to load books.</p>";
+            });
+    </script>
+
+</body>
+</html>
