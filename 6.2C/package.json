@@ -1,0 +1,20 @@
+{
+  "name": "week6-testing-project",
+  "version": "1.0.0",
+  "description": "SIT725 Week 6 - Testing Your Code using Mocha and Chai",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "mocha"
+  },
+  "author": "Student Name",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "chai": "^4.3.10",
+    "mocha": "^10.2.0",
+    "supertest": "^6.3.4"
+  }
+}
