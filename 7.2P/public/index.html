@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Auction House</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>🔨 Live Auction: Antique Vase</h1>
+            <p class="status">Live updates enabled via Socket.IO</p>
+        </header>
+
+        <main>
+            <div class="auction-item">
+                <div class="price-box">
+                    <h3>Current Highest Bid</h3>
+                    <div id="currentPrice" class="price-display">$100</div>
+                    <p>Held by: <span id="bidderName">No bids yet</span></p>
+                </div>
+
+                <div class="bid-controls">
+                    <input type="text" id="userName" placeholder="Your Name" required>
+                    <input type="number" id="bidAmount" placeholder="Enter Amount ($)" required>
+                    <button id="bidBtn" onclick="submitBid()">Place Bid</button>
+                    <p id="errorMsg" class="error"></p>
+                </div>
+            </div>
+
+            <div class="history-section">
+                <h3>Live Feed</h3>
+                <ul id="bidLog">
+                    <!-- Bids will populate here -->
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <!-- Import Socket.IO client library (automatically served by the backend) -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

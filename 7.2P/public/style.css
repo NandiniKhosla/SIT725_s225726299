@@ -1,0 +1,77 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    width: 400px;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+h1 { margin-top: 0; font-size: 1.5rem; color: #333; }
+.status { color: #28a745; font-size: 0.8rem; font-weight: bold; }
+
+.price-box {
+    background: #eef2f5;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.price-display {
+    font-size: 2.5rem;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.bid-controls input {
+    width: 90%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+button:hover { background-color: #0056b3; }
+
+.history-section {
+    margin-top: 20px;
+    text-align: left;
+    border-top: 1px solid #eee;
+}
+
+#bidLog {
+    list-style: none;
+    padding: 0;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+#bidLog li {
+    padding: 5px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.9rem;
+}
+
+.error { color: red; font-size: 0.9rem; min-height: 20px;}
